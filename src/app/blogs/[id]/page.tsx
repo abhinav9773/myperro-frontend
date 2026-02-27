@@ -20,7 +20,9 @@ export default async function BlogPage({
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000");
 
-  const res = await fetch(`${baseUrl}/api/blog/${awaitedParams.id}`);
+  const res = await fetch(`/api/blog/${awaitedParams.id}`, {
+    cache: "no-store",
+  });
   if (!res.ok) return notFound();
 
   const data = await res.json();

@@ -30,7 +30,9 @@ const Blogs = async () => {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000");
 
-    const res = await fetch(`${baseUrl}/api/blog`);
+    const res = await fetch(`/api/blog`, {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error(`Failed to fetch blogs: ${res.status}`);
