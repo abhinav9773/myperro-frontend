@@ -1,4 +1,4 @@
-import { MongoClient} from 'mongodb';
+import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB_NAME;
@@ -7,7 +7,7 @@ let cachedClient: MongoClient | null = null;
 
 async function connectToDatabase() {
   if (!uri) {
-    throw new Error('Please define the MONGODB_URI environment variable');
+    throw new Error("Please define the MONGODB_URI environment variable");
   }
 
   if (cachedClient) return cachedClient;
@@ -18,8 +18,10 @@ async function connectToDatabase() {
   return client;
 }
 
-
-export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const { id } = await params;
   console.log("Requested blog ID:", id);
 
@@ -28,24 +30,24 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     const db = client.db(dbName);
 
     // Search by the custom string `id` field
-    const blog = await db.collection('blogsData').findOne({ id });
+    const blog = await db.collection("blogsData").findOne({ id });
 
     if (!blog) {
-      return new Response(JSON.stringify({ error: 'Blog not found' }), {
+      return new Response(JSON.stringify({ error: "Blog not found" }), {
         status: 404,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" },
       });
     }
 
     return new Response(JSON.stringify(blog), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error('Error fetching blog:', err);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    console.error("Error fetching blog:", err);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
