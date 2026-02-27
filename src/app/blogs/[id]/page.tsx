@@ -23,8 +23,12 @@ async function connectToDatabase() {
   return client;
 }
 
-export default async function BlogPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
   const client = await connectToDatabase();
   const db = client.db(dbName);
