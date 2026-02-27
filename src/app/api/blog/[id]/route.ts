@@ -18,18 +18,14 @@ async function connectToDatabase() {
   return client;
 }
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = params;
+export async function GET(req: Request, context: { params: { id: string } }) {
+  const { id } = context.params;
   console.log("Requested blog ID:", id);
 
   try {
     const client = await connectToDatabase();
     const db = client.db(dbName);
 
-    // Search by the custom string `id` field
     const blog = await db.collection("blogsData").findOne({ id });
 
     if (!blog) {
