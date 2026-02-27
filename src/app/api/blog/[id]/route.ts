@@ -20,9 +20,9 @@ async function connectToDatabase() {
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: { id: string } },
 ) {
-  const { id } = await params;
+  const { id } = params;
   console.log("Requested blog ID:", id);
 
   try {
