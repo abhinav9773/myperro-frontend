@@ -18,7 +18,7 @@ async function connectToDatabase() {
   return client;
 }
 
-export async function GET(req: Request, context: { params: { id: string } }) {
+export async function GET(req: Request, context: any) {
   const { id } = context.params;
   console.log("Requested blog ID:", id);
 
