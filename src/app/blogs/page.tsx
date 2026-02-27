@@ -14,6 +14,7 @@ import { MoveUpRight } from "lucide-react";
 import Newsletter from "@/components/Newsletter/Newsletter";
 import { BlogData } from "@/types/blog";
 import Hero from "@/components/Blogs/Hero";
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Blogs",
   description:
@@ -23,8 +24,6 @@ export const metadata = {
 const Blogs = async () => {
   const blogs: BlogData[] = [];
   try {
-  
-
     const baseUrl =
       process.env.API_URL ||
       (process.env.VERCEL_URL
@@ -69,7 +68,7 @@ const Blogs = async () => {
   const [featured, ...otherBlogs] = blogs;
 
   return (
-       <div className="bg-foreground max-w-[85vw] min-h-screen text-center flex flex-col items-center mt-4">
+    <div className="bg-foreground max-w-[85vw] min-h-screen text-center flex flex-col items-center mt-4">
       <Hero />
 
       <h1 className="font-borela text-4xl sm:text-5xl md:text-7xl text-center md:text-left text-background md:self-start mt-12 md:mt-0">
@@ -79,7 +78,6 @@ const Blogs = async () => {
           TO READ
         </p>
         <p className="md:hidden block">RECENTLY ADDED</p>
-
       </h1>
 
       {/* FEATURED BLOG SECTION */}
@@ -146,7 +144,7 @@ const Blogs = async () => {
       <div className="md:hidden w-full mt-12">
         <Carousel className="w-full">
           <CarouselNext />
-          <CarouselPrevious/>
+          <CarouselPrevious />
           <CarouselContent>
             {otherBlogs.map((blog, index) => (
               <CarouselItem key={index}>
